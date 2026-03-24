@@ -6,6 +6,7 @@ This project presents an interactive **Power BI dashboard** for analyzing sales,
 It provides insights into sales performance, user behavior, and city-level trends.
 
 ## Topics
+
 Power BI, Data analytics, dashboard, DAX, Business Intelligence
 ---
 
