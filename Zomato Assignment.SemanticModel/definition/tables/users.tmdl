@@ -1,0 +1,68 @@
+table users
+	lineageTag: e97480d6-d4c1-4e51-8c2c-45c816a8c91f
+
+	column user_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c79d6355-052d-4ca6-8b1b-7696133677c8
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: dbbe77b8-0289-4d39-92de-3013e0542027
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b6b7275-1f57-4906-b74d-18c132fae13e
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: f1e66152-e8c1-4f4a-bb2f-3181758b192b
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marital Status'
+		dataType: string
+		lineageTag: da431301-5225-44c9-95a9-2fdfbd159926
+		summarizeBy: none
+		sourceColumn: Marital Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		dataType: string
+		lineageTag: 59be11da-f494-4cd2-a9a5-86c7833862d2
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition users = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\UCB\Sem 2\Data warehouse\Datasets\Zomato\users.xlsx"), null, true),
+				    users_Sheet = Source{[Item="users",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(users_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"user_id", Int64.Type}, {"name", type text}, {"Age", Int64.Type}, {"Gender", type text}, {"Marital Status", type text}, {"Occupation", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

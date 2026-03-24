@@ -1,0 +1,72 @@
+table menu
+	lineageTag: 3e54b6ca-2a1a-43ed-813c-61c5e18e33a9
+
+	column menu_id
+		dataType: string
+		lineageTag: 816a2809-af02-48df-ba6f-f5e57a45aff0
+		summarizeBy: none
+		sourceColumn: menu_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column r_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ce2d16e-bced-48b2-b2c7-adab4a6d5a3d
+		summarizeBy: none
+		sourceColumn: r_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column f_id
+		dataType: string
+		lineageTag: 167326bc-3fd7-4f09-8d36-26435802fd82
+		summarizeBy: none
+		sourceColumn: f_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cuisine
+		dataType: string
+		lineageTag: 764ad250-183f-4334-8d7a-e27551f306f9
+		summarizeBy: none
+		sourceColumn: cuisine
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: int64
+		formatString: 0
+		lineageTag: f1ab15c7-9936-4542-a638-cb4d7ab48c6b
+		summarizeBy: sum
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+	column veg_or_non_veg
+		dataType: string
+		lineageTag: 154cefe0-b387-40fe-8089-ca47ddf180ca
+		summarizeBy: none
+		sourceColumn: veg_or_non_veg
+
+		annotation SummarizationSetBy = Automatic
+
+	partition menu = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\UCB\Sem 2\Data warehouse\Datasets\Zomato\menu.xlsx"), null, true),
+				    menu_Sheet = Source{[Item="menu",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(menu_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"menu_id", type text}, {"r_id", Int64.Type}, {"f_id", type text}, {"cuisine", type text}, {"price", Int64.Type}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"f_id"}, food, {"f_id"}, "food", JoinKind.LeftOuter),
+				    #"Expanded food" = Table.ExpandTableColumn(#"Merged Queries", "food", {"veg_or_non_veg"}, {"food.veg_or_non_veg"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded food",{{"food.veg_or_non_veg", "veg_or_non_veg"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns",null,"Other",Replacer.ReplaceValue,{"veg_or_non_veg"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

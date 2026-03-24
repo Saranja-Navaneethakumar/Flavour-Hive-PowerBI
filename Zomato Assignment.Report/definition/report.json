@@ -1,0 +1,239 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.2.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU10",
+      "reportVersionAtImport": {
+        "visual": "1.8.96",
+        "report": "2.0.96",
+        "page": "1.3.96"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "textSearchSlicerF85E2E78BE4A4D7D9F99ED75B5D71C85"
+  ],
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY24SU10",
+          "path": "BaseThemes/CY24SU10.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "bar-chart1724488306965668.png",
+          "path": "bar-chart1724488306965668.png",
+          "type": "Image"
+        },
+        {
+          "name": "bar-chart2508067977096562.png",
+          "path": "bar-chart2508067977096562.png",
+          "type": "Image"
+        },
+        {
+          "name": "bar-chart4351491646253747.png",
+          "path": "bar-chart4351491646253747.png",
+          "type": "Image"
+        },
+        {
+          "name": "biryani_(1)3852864347066265.png",
+          "path": "biryani_(1)3852864347066265.png",
+          "type": "Image"
+        },
+        {
+          "name": "chevron_(1)9967904163185723.png",
+          "path": "chevron_(1)9967904163185723.png",
+          "type": "Image"
+        },
+        {
+          "name": "chevron11581227741545819.png",
+          "path": "chevron11581227741545819.png",
+          "type": "Image"
+        },
+        {
+          "name": "coins8346337880488419.png",
+          "path": "coins8346337880488419.png",
+          "type": "Image"
+        },
+        {
+          "name": "decrease6412101203286971.png",
+          "path": "decrease6412101203286971.png",
+          "type": "Image"
+        },
+        {
+          "name": "fast-food_(1)5339533465075572.png",
+          "path": "fast-food_(1)5339533465075572.png",
+          "type": "Image"
+        },
+        {
+          "name": "fast-food_(2)7419697036658692.png",
+          "path": "fast-food_(2)7419697036658692.png",
+          "type": "Image"
+        },
+        {
+          "name": "Food-Delivery-PNG-Transparent-8642425726137386.png",
+          "path": "Food-Delivery-PNG-Transparent-8642425726137386.png",
+          "type": "Image"
+        },
+        {
+          "name": "home_(1)49482936096052055.png",
+          "path": "home_(1)49482936096052055.png",
+          "type": "Image"
+        },
+        {
+          "name": "home_(1)8810130862861134.png",
+          "path": "home_(1)8810130862861134.png",
+          "type": "Image"
+        },
+        {
+          "name": "home_(1)9779414363544938.png",
+          "path": "home_(1)9779414363544938.png",
+          "type": "Image"
+        },
+        {
+          "name": "increase016661347565462004.png",
+          "path": "increase016661347565462004.png",
+          "type": "Image"
+        },
+        {
+          "name": "non-veg16995908513987705.png",
+          "path": "non-veg16995908513987705.png",
+          "type": "Image"
+        },
+        {
+          "name": "others15925507612367418.png",
+          "path": "others15925507612367418.png",
+          "type": "Image"
+        },
+        {
+          "name": "salad_(1)48021970305549844.png",
+          "path": "salad_(1)48021970305549844.png",
+          "type": "Image"
+        },
+        {
+          "name": "select8206631322979092.png",
+          "path": "select8206631322979092.png",
+          "type": "Image"
+        },
+        {
+          "name": "settings_(3)10422066827707366.png",
+          "path": "settings_(3)10422066827707366.png",
+          "type": "Image"
+        },
+        {
+          "name": "settings_(3)5376931650459533.png",
+          "path": "settings_(3)5376931650459533.png",
+          "type": "Image"
+        },
+        {
+          "name": "settings_(3)9976547463596745.png",
+          "path": "settings_(3)9976547463596745.png",
+          "type": "Image"
+        },
+        {
+          "name": "shopping-bag693912004407023.png",
+          "path": "shopping-bag693912004407023.png",
+          "type": "Image"
+        },
+        {
+          "name": "soup-clipart-transparent-backg27856200857469426.png",
+          "path": "soup-clipart-transparent-backg27856200857469426.png",
+          "type": "Image"
+        },
+        {
+          "name": "star39617375346029027.png",
+          "path": "star39617375346029027.png",
+          "type": "Image"
+        },
+        {
+          "name": "user_(5)15198926251092426.png",
+          "path": "user_(5)15198926251092426.png",
+          "type": "Image"
+        },
+        {
+          "name": "user_(9)20203782833675055.png",
+          "path": "user_(9)20203782833675055.png",
+          "type": "Image"
+        },
+        {
+          "name": "user_(9)3761370827894568.png",
+          "path": "user_(9)3761370827894568.png",
+          "type": "Image"
+        },
+        {
+          "name": "user-check5077593318711693.png",
+          "path": "user-check5077593318711693.png",
+          "type": "Image"
+        },
+        {
+          "name": "user5444002951758655.png",
+          "path": "user5444002951758655.png",
+          "type": "Image"
+        },
+        {
+          "name": "veg19743287001756096.png",
+          "path": "veg19743287001756096.png",
+          "type": "Image"
+        },
+        {
+          "name": "world_map_PNG28006653474737811749.png",
+          "path": "world_map_PNG28006653474737811749.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  },
+  "slowDataSourceSettings": {
+    "isCrossHighlightingDisabled": false,
+    "isSlicerSelectionsButtonEnabled": false,
+    "isFilterSelectionsButtonEnabled": false,
+    "isFieldWellButtonEnabled": false,
+    "isApplyAllButtonEnabled": false
+  }
+}

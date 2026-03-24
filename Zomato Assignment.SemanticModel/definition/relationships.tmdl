@@ -1,0 +1,20 @@
+relationship 54afc0ae-6aa0-4f62-8b8c-868dfcf3d390
+	joinOnDateBehavior: datePartOnly
+	fromColumn: orders.order_date
+	toColumn: LocalDateTable_50ad293c-f4d5-420a-9b5c-182d284932e4.Date
+
+relationship AutoDetected_efd74a56-08c8-4f65-bfdc-5045951e3280
+	crossFilteringBehavior: bothDirections
+	fromColumn: orders.user_id
+	toColumn: users.user_id
+
+relationship c9902c4a-658f-c21b-da74-199ce02efb3c
+	fromColumn: orders.r_id
+	toColumn: restaurant.id
+
+relationship 67a5fb70-b11e-f944-43f3-987691f42e34
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: orders.r_id
+	toColumn: menu.r_id
+

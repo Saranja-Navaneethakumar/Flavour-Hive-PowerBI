@@ -1,0 +1,43 @@
+table food
+	lineageTag: 11a3e704-4dee-43a9-b00a-0c16213b882c
+
+	column f_id
+		dataType: string
+		lineageTag: 1eb92d4b-ce96-4eb2-8899-26d9631750a9
+		summarizeBy: none
+		sourceColumn: f_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column item
+		dataType: string
+		lineageTag: 1270a407-0895-4053-ac8c-b7e2c8b8d53e
+		summarizeBy: none
+		sourceColumn: item
+
+		annotation SummarizationSetBy = Automatic
+
+	column veg_or_non_veg
+		dataType: string
+		lineageTag: 08483c37-d424-48dc-a046-599d3a7eb5b0
+		summarizeBy: none
+		sourceColumn: veg_or_non_veg
+
+		annotation SummarizationSetBy = Automatic
+
+	partition food = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\UCB\Sem 2\Data warehouse\Datasets\Zomato\food.xlsx"), null, true),
+				    food_Sheet = Source{[Item="food",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(food_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"f_id", type text}, {"item", type text}, {"veg_or_non_veg", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

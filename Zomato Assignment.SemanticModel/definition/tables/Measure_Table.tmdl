@@ -1,0 +1,121 @@
+table Measure_Table
+	lineageTag: 381c1a8e-1fe5-4ddf-8dd7-6768ff3af86d
+
+	measure Sale_Value = SUM(orders[Value])
+		formatString: 0
+		lineageTag: 0a05313c-7f1a-4251-9bc9-d01cc51a11f1
+
+	measure TopN_Sale =
+			
+			Var RankValue = RANKX(ALL(orders[city]),[Sale_Value],,DESC)
+			Var SelectedRank = SELECTEDVALUE(Rank_Table[No])
+			Return
+			IF(SelectedRank =0, [Sale_Value],
+			If(RankValue<=SelectedRank, [Sale_Value],BLANK())
+			)
+		formatString: 0
+		lineageTag: 0c76384d-e819-4e9c-98d7-1b702df3f28a
+
+	measure Dynamic_TopN_Title =
+			Var SelectRank = SELECTEDVALUE(Rank_Table[Type])
+			                     Var SelectType= SELECTEDVALUE(orders[Type])
+			return
+			SelectRank&" City "&SelectType
+		lineageTag: a1abaf25-f2ea-4573-b95c-8d0056ea6b38
+
+	measure Veg_Count = COUNTROWS(FILTER(menu, menu[veg_or_non_veg] = "Veg"))
+		formatString: 0
+		lineageTag: e9a55100-202b-4130-b93b-c69082cbc37b
+
+	measure Dynamic_SubHeading = "Flavour Hive providing services in "&COUNT(orders[city])&" and connected with "&DISTINCTCOUNT(users[user_id])&" where got " &COUNT(orders[user_id])&" Orders."
+		lineageTag: 8222aaa8-812b-449c-94f4-76323c91702b
+
+	measure UserCount = DISTINCTCOUNT(users[user_id])
+		formatString: 0
+		lineageTag: e4b609a1-dae9-459c-b9ea-bd3c04bd1be3
+
+	measure ActiveUser = DISTINCTCOUNT(orders[user_id])
+		formatString: 0
+		lineageTag: 04b427c5-36b8-4abd-8cf9-fb3a6902d088
+
+	measure GainCustomer =
+			Var FilterUsers = FILTER(SUMMARIZE(users, users[user_id]), AND([PrevYearSale]<=0, [CurrentYearSale]>0 ))
+			RETURN CALCULATE([UserCount], FilterUsers)
+		formatString: 0
+		lineageTag: 43bb1efe-212f-4363-94e1-1f411765aa38
+
+	measure CurrYear = 2020
+		formatString: 0
+		lineageTag: b5fb71a6-30be-43c0-ae56-63eb26ffbe4d
+
+	measure PrevYear = [CurrYear]-1
+		formatString: 0
+		lineageTag: a8931e93-9496-40df-a9e2-8facf90dc65d
+
+	measure CurrentYearSale =
+			Var Yr = [CurrYear]
+			RETURN
+			CALCULATE([Sale_Value], orders[Year]=Yr)
+		formatString: 0
+		lineageTag: df91fc48-a179-4dbf-ae99-0d9fa06948f6
+
+	measure PrevYearSale =
+			Var Yr = [PrevYear]
+			RETURN
+			CALCULATE([Sale_Value], orders[Year]=Yr)
+		formatString: 0
+		lineageTag: 8ccbd5b4-0bcf-4a67-a548-036a3c496fdf
+
+	measure LostCustomer =
+			Var FilterUsers = FILTER(SUMMARIZE(users, users[user_id]), AND([CurrentYearSale]<=0, [PrevYearSale]>0 ))
+			RETURN CALCULATE([UserCount], FilterUsers)
+		formatString: 0
+		lineageTag: d293e884-170d-43eb-a962-f2aabe10460f
+
+	measure Single = ```
+			CALCULATE([UserCount], 'users'[Marital Status] = "Single")
+			
+			```
+		formatString: 0
+		lineageTag: 5e1561b9-a0c1-4e0e-abe4-6ad7ac3fde53
+
+	measure Married = CALCULATE([UserCount], 'users'[Marital Status] = "Married")
+		formatString: 0
+		lineageTag: 9cc989a5-8664-4289-ae99-3a80b93a2de7
+
+	measure PreferNot = ```
+			CALCULATE([UserCount], 'users'[Marital Status] = "Prefer not to say")
+			
+			```
+		formatString: 0
+		lineageTag: e1ae6945-e879-406e-bc0f-613f2e5f00ac
+
+	measure '% single' = DIVIDE([Single], [UserCount],0)
+		formatString: 0%;-0%;0%
+		lineageTag: 5e4361fa-3169-4f05-9198-c8fd8f9b3ce5
+
+	measure '% married' = DIVIDE([Married], [UserCount],0)
+		formatString: 0%;-0%;0%
+		lineageTag: 2c2326a0-8cdf-4120-b91a-bca61daa1fff
+
+	measure '% prefernot' = DIVIDE([PreferNot], [UserCount],0)
+		formatString: 0%;-0%;0%
+		lineageTag: 1cf70614-23e0-4965-8977-07d511d6c05c
+
+	column Column
+		formatString: 0
+		lineageTag: afbaa3e6-5d69-4b1f-a50e-5308e3988627
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Measure_Table = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = eebb9fec1aac41d48423bac92c5c9775
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

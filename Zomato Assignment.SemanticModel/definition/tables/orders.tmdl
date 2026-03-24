@@ -1,0 +1,117 @@
+table orders
+	lineageTag: e6210bf8-9f76-4563-b406-fa7318260f7c
+
+	measure Order_Count = COUNT(orders[order_date])
+		formatString: 0
+		lineageTag: 5beb054d-842e-4d39-8e43-658df4bc238a
+
+	measure Measure
+		lineageTag: 22c0b365-661d-4be5-b2ac-343402b3a206
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	measure Rating_Count = count(restaurant[rating])
+		formatString: 0
+		lineageTag: 28604424-3e52-4853-9f88-ccd23fbd2bfa
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c2bc4130-5bb4-452d-8a7b-e24ec0a7f51a
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: 54afc0ae-6aa0-4f62-8b8c-868dfcf3d390
+			defaultHierarchy: LocalDateTable_50ad293c-f4d5-420a-9b5c-182d284932e4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column currency
+		dataType: string
+		lineageTag: a695020a-ed02-4516-847c-0409d21f84de
+		summarizeBy: none
+		sourceColumn: currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b42b6dda-1dcb-491c-8e5d-b43010677ff4
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column r_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c531703-9c4b-45d4-9743-4e32a7c7dcf3
+		summarizeBy: none
+		sourceColumn: r_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 45b55486-ef13-42f1-8576-d444c6ebe007
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: 67fc7042-8451-40a2-a258-9f493b24e50f
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: b1ad6eb6-900e-455f-aa7a-2ced97bc863f
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Year = VALUE(FORMAT(orders[order_date], "yyyy"))
+		lineageTag: 8dd94269-e7fb-4796-9521-50f426fa86bd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition orders = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\UCB\Sem 2\Data warehouse\Datasets\Zomato\orders.xlsx"), null, true),
+				    orders_Sheet = Source{[Item="orders",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(orders_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_date", type date}, {"sales_qty", Int64.Type}, {"sales_amount", Int64.Type}, {"currency", type text}, {"user_id", Int64.Type}, {"r_id", Int64.Type}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"r_id"}, restaurant, {"id"}, "restaurant", JoinKind.LeftOuter),
+				    #"Expanded restaurant" = Table.ExpandTableColumn(#"Merged Queries", "restaurant", {"city"}, {"restaurant.city"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded restaurant",{{"restaurant.city", "city"}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns", each true),
+				    #"Replaced Value" = Table.ReplaceValue(#"Filtered Rows",null,"Other",Replacer.ReplaceValue,{"city"}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Replaced Value", {"order_date", "currency", "user_id", "r_id", "city"}, "Attribute", "Value"),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Unpivoted Columns","sales_qty","Quantity",Replacer.ReplaceValue,{"Attribute", "Value"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","sales_amount","Amount",Replacer.ReplaceValue,{"Attribute", "Value"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Replaced Value2",{{"Attribute", "Type"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns1",{{"Value", type number}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

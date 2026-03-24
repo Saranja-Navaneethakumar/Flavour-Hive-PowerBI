@@ -1,0 +1,35 @@
+table orders_Type
+	lineageTag: 01750143-6bc0-4994-94a7-c1e558abec9b
+
+	column Order_Id
+		dataType: string
+		lineageTag: 537854f4-2766-4803-8792-8951a4d5dfe0
+		summarizeBy: none
+		sourceColumn: Order_Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: fd7393b7-81e4-4826-b33d-373614e96dc2
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition orders_Type = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\UCB\Sem 2\Data warehouse\Datasets\Zomato\orders_Type.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Sheet1_Sheet,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Order_Id", type text}, {"Type", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

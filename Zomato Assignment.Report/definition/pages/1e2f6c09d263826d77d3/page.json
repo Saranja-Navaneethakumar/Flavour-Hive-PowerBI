@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "1e2f6c09d263826d77d3",
+  "displayName": "User Performance",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "3D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#FEF9F1'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "f80a088e982047142bcd",
+      "target": "51b8a7ee8e170345659b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "f80a088e982047142bcd",
+      "target": "b4304068a4b97d8f0d8e",
+      "type": "NoFilter"
+    }
+  ]
+}
