@@ -9,11 +9,11 @@ It provides insights into sales performance, user behavior, and city-level trend
 
 ## Features
 
-* 1. City-wise sales analysis
-* 2. Yearly sales trends
-* 3. User gain & loss analysis
-* 4. Ratings and order insights
-* 5. Category-wise performance (Veg, Non-Veg, Others)
+* City-wise sales analysis
+* Yearly sales trends
+* User gain & loss analysis
+* Ratings and order insights
+* Category-wise performance (Veg, Non-Veg, Others)
 
 ---
 
@@ -30,21 +30,25 @@ Flavour-Hive-PowerBI/
 
 ## Dashboards
 
-### 1️. Sales Dashboard
-
+### 1. Dashboard
+!(images_dashboard/Dashboard.jpeg)
+* Index page to redirect other dashboards
+  
+### 2. Sales Dashboard
+!(images_dashboard/Restaurant_Sales.jpeg)
 * Total Amount: 987M
 * Total Orders: 150K
 * Sales trend from 2017–2020
 * Top-performing cities
 
-### 2️. City Analysis
-
+### 3. City Analysis
+!(images_dashboard/City_Analysis.jpeg)
 * Sales by city
 * User distribution by location
 * Gain & loss users per city
 
-### 3️. User Analysis
-
+### 4. User Analysis
+!(images_dashboard/User_Analysis.jpeg)
 * Active users: 78K
 * User demographics (age, gender, marital status)
 * Gain vs Lost users breakdown
@@ -69,7 +73,7 @@ Flavour-Hive-PowerBI/
   * User activity
   * Ratings
 
-[(*Dataset provided in `/Dataset` folder or via external link if large*)](https://drive.google.com/drive/u/1/folders/1__rStAFMHVUk4qcvS8wg-_rfR9KUM80j)
+[(Dataset)](https://drive.google.com/drive/u/1/folders/1__rStAFMHVUk4qcvS8wg-_rfR9KUM80j)
 
 ---
 
