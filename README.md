@@ -2,9 +2,11 @@
 
 ## Project Overview
 
-This project presents an interactive **Power BI dashboard** for analyzing food delivery data from *Flavour Hive*.
+This project presents an interactive **Power BI dashboard** for analyzing sales, user behavior, and city trends for a food delivery platform *Flavour Hive*.
 It provides insights into sales performance, user behavior, and city-level trends.
 
+## Topics
+Power BI, Data analytics, dashboard, DAX, Business Intelligence
 ---
 
 ## Features
@@ -31,24 +33,24 @@ Flavour-Hive-PowerBI/
 ## Dashboards
 
 ### 1. Dashboard
-!(images_dashboard/Dashboard.jpeg)
+![Dashboard](images_dashboard/Dashboard.jpeg)
 * Index page to redirect other dashboards
   
 ### 2. Sales Dashboard
-!(images_dashboard/Restaurant_Sales.jpeg)
+![Sales Dashboard](images_dashboard/Restaurant_Sales.jpeg)
 * Total Amount: 987M
 * Total Orders: 150K
 * Sales trend from 2017–2020
 * Top-performing cities
 
 ### 3. City Analysis
-!(images_dashboard/City_Analysis.jpeg)
+![City Analysis](images_dashboard/City_Analysis.jpeg)
 * Sales by city
 * User distribution by location
 * Gain & loss users per city
 
 ### 4. User Analysis
-!(images_dashboard/User_Analysis.jpeg)
+![User Analysis](images_dashboard/User_Analysis.jpeg)
 * Active users: 78K
 * User demographics (age, gender, marital status)
 * Gain vs Lost users breakdown
