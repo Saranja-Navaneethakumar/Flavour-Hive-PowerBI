@@ -25,6 +25,7 @@ Power BI, Data analytics, dashboard, DAX, Business Intelligence
 ```
 Flavour-Hive-PowerBI/
 ├── Report/           # Power BI report files
+├── images_dashboard/           # Power BI report files
 ├── *.pbip            # Power BI Project file
 ├── README.md
 ```
@@ -71,7 +72,11 @@ Flavour-Hive-PowerBI/
 * Contains sales, user, and city-level data
 * Includes:
 
+  * Food
+  * Menu
   * Orders
+  * Restaurant
+  * Order Type
   * Revenue
   * User activity
   * Ratings
